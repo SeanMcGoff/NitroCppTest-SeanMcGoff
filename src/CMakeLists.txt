@@ -1,0 +1,1 @@
+add_executable(NitroCppTest_SeanMcGoff main.cpp)

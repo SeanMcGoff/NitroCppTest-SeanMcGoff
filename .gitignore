@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Build Dirs
+build/
+cmake-build/
+cmake-build-debug/
+cmake-build-release/
+
+# IDE Folders
+.idea/
+.vscode/
