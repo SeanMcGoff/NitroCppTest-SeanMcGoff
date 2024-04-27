@@ -6,5 +6,10 @@
 
 using json = nlohmann::json;
 
+// Reads in JSON file and returns the parsed data
 json readJSONFile(const std::string& filePath);
-#endif NITROCPPTEST_JSON_H
+
+// Makes sure JSON is of correct format given design brief
+bool validateJSON(const json& j);
+
+#endif //NITROCPPTEST_JSON_H

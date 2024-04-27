@@ -7,21 +7,27 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(
-        test-json
+        NitroCppTest-gtest
+        # Testing Files
         json/test-json.cpp
-        # Modules Used
+        rectangle/test-rectangle.cpp
+        # Header / Cpp Files
         ../src/json.h
         ../src/json.cpp
+        ../src/rectangle.h
+        ../src/rectangle.cpp
 )
 
 # There's definitely a better way of doing this
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/json/hello.json ${CMAKE_CURRENT_BINARY_DIR}/hello.json COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/json/rectangles.json ${CMAKE_CURRENT_BINARY_DIR}/rectangles.json COPYONLY)
 
 target_link_libraries(
-        test-json
+        NitroCppTest-gtest
         GTest::gtest_main
         nlohmann_json::nlohmann_json
 )
 
 include(GoogleTest)
-gtest_discover_tests(test-json)
+gtest_discover_tests(NitroCppTest-gtest)
+
