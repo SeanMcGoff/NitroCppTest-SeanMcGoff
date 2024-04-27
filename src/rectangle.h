@@ -1,5 +1,6 @@
 #ifndef NITROCPPTEST_RECTANGLE_H
 #define NITROCPPTEST_RECTANGLE_H
+#include <set>
 #include <vector>
 class Rectangle {
 private:
@@ -26,7 +27,7 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    const std::vector<std::string> &getParentRects() const;
+    const std::vector<std::string>& getParentRects() const;
 
     std::string getName() const;
 
@@ -41,5 +42,11 @@ public:
     // Destructor
     ~Rectangle()=default;
 };
+
+// Finds all intersections of a list of rectangles, and returns them
+std::vector<Rectangle> intersectionsOf(std::vector<Rectangle>& rects);
+
+// Checks to see if rectangle exists in vector of rectangles
+bool hasDuplicateParents(std::vector<Rectangle>& rects, std::vector<std::string>& pr);
 
 #endif //NITROCPPTEST_RECTANGLE_H

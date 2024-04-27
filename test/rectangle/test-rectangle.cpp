@@ -40,8 +40,41 @@ TEST(Rectangle, stringConversionOperator2) {
 }
 
 TEST(Rectangle, intersection) {
-  Rectangle r1 = Rectangle(0,0,100,100);
-  Rectangle r2 = Rectangle(50,50,200,25);
-  Rectangle rInter = Rectangle(50,50,50,25);
+  Rectangle r1 = Rectangle(0,0,100,100,"1");
+  Rectangle r2 = Rectangle(50,50,200,25,"2");
+  Rectangle rInter = Rectangle(50,50,50,25,"",{r1.getName(),r2.getName()});
   EXPECT_EQ(r1.intersection(r2),rInter);
+}
+
+TEST(Rectangle, intersectionsOf) {
+  std::vector<Rectangle> rects = {
+          Rectangle(100,100,250,80,"1"),
+          Rectangle(120,200,250,150,"2"),
+          Rectangle(140,160,250,100,"3"),
+          Rectangle(160,140,350,190,"4")
+  };
+  std::vector<Rectangle> expected_intersections = {
+          Rectangle(140,160,210,20,"",{"1","3"}),
+          Rectangle(160,140,190,40,"",{"1","4"}),
+          Rectangle(140,200,230,60,"",{"2","3"}),
+          Rectangle(160,200,210,130,"",{"2","4"}),
+          Rectangle(160,160,230,100,"",{"3","4"}),
+          Rectangle(160,160,190,20,"",{"1","3","4"}),
+          Rectangle(160,200,210,60,"",{"2","3","4"}),
+  };
+  std::vector<Rectangle> intersections = intersectionsOf(rects);
+  for(int i = 0; i < intersections.size(); ++i) {
+    EXPECT_EQ(intersections[i], expected_intersections[i]);
+  }
+}
+
+TEST(Rectangle, duplicateParents) {
+  std::vector<Rectangle> rects = {
+          Rectangle(100,100,250,80,"1",{"a","b","c"}),
+          Rectangle(120,200,250,150,"2",{"a","b","d"}),
+  };
+  std::vector<std::string> goodInput = {"a","b","c"};
+  std::vector<std::string> badInput = {"a","b"};
+  EXPECT_EQ(hasDuplicateParents(rects,goodInput), true);
+  EXPECT_EQ(hasDuplicateParents(rects,badInput), false);
 }
