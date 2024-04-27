@@ -7,13 +7,21 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(
-        test-main
-        test.cpp
+        test-json
+        json/test-json.cpp
+        # Modules Used
+        ../src/json.h
+        ../src/json.cpp
 )
+
+# There's definitely a better way of doing this
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/json/hello.json ${CMAKE_CURRENT_BINARY_DIR}/hello.json COPYONLY)
+
 target_link_libraries(
-        test-main
+        test-json
         GTest::gtest_main
+        nlohmann_json::nlohmann_json
 )
 
 include(GoogleTest)
-gtest_discover_tests(test-main)
+gtest_discover_tests(test-json)
