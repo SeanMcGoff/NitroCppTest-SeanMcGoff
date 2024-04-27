@@ -7,7 +7,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(
-        NitroCppTest-gtest
+        NitroCppTest_gtest
         # Testing Files
         json/test-json.cpp
         rectangle/test-rectangle.cpp
@@ -23,11 +23,11 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/json/hello.json ${CMAKE_CURRENT_BINAR
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/json/rectangles.json ${CMAKE_CURRENT_BINARY_DIR}/rectangles.json COPYONLY)
 
 target_link_libraries(
-        NitroCppTest-gtest
+        NitroCppTest_gtest
         GTest::gtest_main
         nlohmann_json::nlohmann_json
 )
 
 include(GoogleTest)
-gtest_discover_tests(NitroCppTest-gtest)
+gtest_discover_tests(NitroCppTest_gtest)
 
