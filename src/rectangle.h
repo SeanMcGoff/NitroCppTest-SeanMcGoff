@@ -9,15 +9,15 @@ private:
     int top;
     int bottom;
 
-    // Informal name of the rectangle (for this code, they will be stored as "1", "2", "3", etc.)
+    // Name of the rectangle (for this code, they will be stored as "1", "2", "3", etc.)
     std::string name;
 
     // This is in order to stop the algorithm from computing nested intersections of the same rectangle
-    std::vector<Rectangle*> parentRects;
+    std::vector<std::string> parentRects;
 
 public:
     // Constructor
-    Rectangle(int x, int y, int w, int h, std::string name="", std::vector<Rectangle*> parentRects = {});
+    Rectangle(int x, int y, int w, int h, std::string name="", std::vector<std::string> parentRects = {});
     // Getters
     int getLeft() const;
     int getRight() const;
@@ -25,6 +25,8 @@ public:
     int getBottom() const;
     int getWidth() const;
     int getHeight() const;
+
+    const std::vector<std::string> &getParentRects() const;
 
     std::string getName() const;
 
@@ -39,4 +41,5 @@ public:
     // Destructor
     ~Rectangle()=default;
 };
+
 #endif //NITROCPPTEST_RECTANGLE_H
