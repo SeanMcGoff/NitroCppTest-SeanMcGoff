@@ -4,49 +4,53 @@
 #include <vector>
 class Rectangle {
 private:
-    // Storing the edges instead of x/y/w/h makes the intersection code simpler
-    int left;
-    int right;
-    int top;
-    int bottom;
+  // Storing the edges instead of x/y/w/h makes the intersection code simpler
+  int left;
+  int right;
+  int top;
+  int bottom;
 
-    // Unique Key of the Rectangle (for this code, they will be stored as "1", "2", "3", etc.)
-    std::string key;
+  // Unique Key of the Rectangle (for this code, they will be stored as "1",
+  // "2", "3", etc.)
+  std::string key;
 
-    // This is in order to stop the algorithm from computing nested intersections of the same rectangle
-    std::vector<std::string> parentRects;
+  // This is in order to stop the algorithm from computing nested intersections
+  // of the same rectangle
+  std::vector<std::string> parentRects;
 
 public:
-    // Constructor
-    Rectangle(int x, int y, int w, int h, std::string key="", std::vector<std::string> parentRects = {});
-    // Getters
-    int getLeft() const;
-    int getRight() const;
-    int getTop() const;
-    int getBottom() const;
-    int getWidth() const;
-    int getHeight() const;
+  // Constructor
+  Rectangle(int x, int y, int w, int h, std::string key = "",
+            std::vector<std::string> parentRects = {});
+  // Getters
+  int getLeft() const;
+  int getRight() const;
+  int getTop() const;
+  int getBottom() const;
+  int getWidth() const;
+  int getHeight() const;
 
-    const std::vector<std::string>& getParentRects() const;
+  const std::vector<std::string> &getParentRects() const;
 
-    std::string getKey() const;
+  std::string getKey() const;
 
-    // Equality Operator (for null logic and Testing)
-    bool operator==(const Rectangle& r) const;
-    // String Conversion (for logging and output)
-    operator std::string() const;
-    // Checks if this Rectangle is a child of the Rectangle "r"
-    bool isChildOf(const Rectangle& r);
-    // Finds the intersection between two rectangles, and returns that Rectangle
-    Rectangle intersection(Rectangle& r);
-    // Destructor
-    ~Rectangle()=default;
+  // Equality Operator (for null logic and Testing)
+  bool operator==(const Rectangle &r) const;
+  // String Conversion (for logging and output)
+  operator std::string() const;
+  // Checks if this Rectangle is a child of the Rectangle "r"
+  bool isChildOf(const Rectangle &r);
+  // Finds the intersection between two rectangles, and returns that Rectangle
+  Rectangle intersection(Rectangle &r);
+  // Destructor
+  ~Rectangle() = default;
 };
 
 // Finds all intersections of a list of rectangles, and returns them
-std::vector<Rectangle> intersectionsOf(std::vector<Rectangle>& rects);
+std::vector<Rectangle> intersectionsOf(std::vector<Rectangle> &rects);
 
 // Checks to see if rectangle exists in vector of rectangles
-bool hasDuplicateParents(std::vector<Rectangle>& rects, std::vector<std::string>& pr);
+bool hasDuplicateParents(std::vector<Rectangle> &rects,
+                         std::vector<std::string> &pr);
 
-#endif //NITROCPPTEST_RECTANGLE_H
+#endif // NITROCPPTEST_RECTANGLE_H
