@@ -12,7 +12,7 @@ TEST(Rectangle, Constructor) {
 TEST(Rectangle, isChildOf) {
   Rectangle r1 = Rectangle(0,0,100,100, "1");
   Rectangle r2 = Rectangle(100,100,100,100, "2");
-  Rectangle r3 = Rectangle(0,0,50,50,"",{r1.getName()});
+  Rectangle r3 = Rectangle(0,0,50,50,"",{r1.getKey()});
   EXPECT_EQ(r3.isChildOf(r1), true);
   EXPECT_EQ(r3.isChildOf(r2), false);
 }
@@ -35,14 +35,14 @@ TEST(Rectangle, stringConversionOperator2) {
   std::string s = "Between rectangle 1 and 3 at (140,160), w=210, h=20.";
   Rectangle r1 = Rectangle(0,0,0,0,"1");
   Rectangle r3 = Rectangle(0,0,0,0,"3");
-  Rectangle r = Rectangle(140,160,210,20,"",{r1.getName(),r3.getName()});
+  Rectangle r = Rectangle(140,160,210,20,"",{r1.getKey(),r3.getKey()});
   EXPECT_EQ(std::string(r),s);
 }
 
 TEST(Rectangle, intersection) {
   Rectangle r1 = Rectangle(0,0,100,100,"1");
   Rectangle r2 = Rectangle(50,50,200,25,"2");
-  Rectangle rInter = Rectangle(50,50,50,25,"",{r1.getName(),r2.getName()});
+  Rectangle rInter = Rectangle(50,50,50,25,"",{r1.getKey(),r2.getKey()});
   EXPECT_EQ(r1.intersection(r2),rInter);
 }
 

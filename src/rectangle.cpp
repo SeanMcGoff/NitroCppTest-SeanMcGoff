@@ -31,7 +31,7 @@ std::vector<Rectangle> intersectionsOf(std::vector<Rectangle>& rects) {
         if(itr->isChildOf(r)) continue;
         // Similarly, if we have the intersection of 1, 2, and 3, finding the intersection of 1, 3, and 2 is redundant
         std::vector<std::string> currentParentRects = itr->getParentRects();
-        currentParentRects.push_back(r.getName());
+        currentParentRects.push_back(r.getKey());
         if(hasDuplicateParents(unchecked_intersections,currentParentRects)) continue;
         // Provided we don't hit a duplicate case, we can check the intersection
         Rectangle r_inter = itr->intersection(r);
@@ -45,13 +45,13 @@ std::vector<Rectangle> intersectionsOf(std::vector<Rectangle>& rects) {
   return checked_intersections;
 }
 
-Rectangle::Rectangle (int x, int y, int w, int h, std::string name, std::vector<std::string> parentRects) {
+Rectangle::Rectangle (int x, int y, int w, int h, std::string key, std::vector<std::string> parentRects) {
   if(w < 0 || h < 0) throw std::out_of_range("Area cannot be less than 0");
   this->left = x;
   this->right = x+w;
   this->top = y;
   this->bottom = y+h;
-  this->name = name;
+  this->key = key;
   this->parentRects = parentRects;
 }
 
@@ -79,8 +79,8 @@ int Rectangle::getHeight() const {
   return this->getBottom() - this->getTop();
 }
 
-std::string Rectangle::getName() const {
-  return this->name;
+std::string Rectangle::getKey() const {
+  return this->key;
 }
 
 const std::vector<std::string>& Rectangle::getParentRects() const {
@@ -88,7 +88,7 @@ const std::vector<std::string>& Rectangle::getParentRects() const {
 }
 
 bool Rectangle::isChildOf(const Rectangle& r) {
-  return std::find(this->parentRects.begin(),this->parentRects.end(),r.getName()) != this->parentRects.end();
+  return std::find(this->parentRects.begin(),this->parentRects.end(),r.getKey()) != this->parentRects.end();
 }
 
 bool Rectangle::operator==(const Rectangle &r) const {
@@ -124,7 +124,7 @@ Rectangle::operator std::string() const {
     prefix += " at ";
   } else {
     // If the rectangle has no parents
-    prefix = this->getName() + ": Rectangle at ";
+    prefix = this->getKey() + ": Rectangle at ";
   }
   return prefix + "("
   +std::to_string(this->getLeft())
@@ -148,13 +148,13 @@ Rectangle Rectangle::intersection(Rectangle& r) {
   int bottom_inter = std::min(this->getBottom(),r.getBottom());
   // Construct List of Parent Rectangles
   std::vector<std::string> pr;
-  // Either push back name of current rectangle, or their parents (if they exist) for both rectangles in function
-  if(this->getParentRects().size() == 0) pr.push_back(this->getName());
+  // Either push back key of current rectangle, or their parents (if they exist) for both rectangles in function
+  if(this->getParentRects().size() == 0) pr.push_back(this->getKey());
   else {
     for(std::string r_parent : this->getParentRects()) pr.push_back(r_parent);
   }
 
-  if(r.getParentRects().size() == 0) pr.push_back(r.getName());
+  if(r.getParentRects().size() == 0) pr.push_back(r.getKey());
   else {
     for(std::string r_parent : r.getParentRects()) pr.push_back(r_parent);
   }

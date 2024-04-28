@@ -10,15 +10,15 @@ private:
     int top;
     int bottom;
 
-    // Name of the rectangle (for this code, they will be stored as "1", "2", "3", etc.)
-    std::string name;
+    // Unique Key of the Rectangle (for this code, they will be stored as "1", "2", "3", etc.)
+    std::string key;
 
     // This is in order to stop the algorithm from computing nested intersections of the same rectangle
     std::vector<std::string> parentRects;
 
 public:
     // Constructor
-    Rectangle(int x, int y, int w, int h, std::string name="", std::vector<std::string> parentRects = {});
+    Rectangle(int x, int y, int w, int h, std::string key="", std::vector<std::string> parentRects = {});
     // Getters
     int getLeft() const;
     int getRight() const;
@@ -29,7 +29,7 @@ public:
 
     const std::vector<std::string>& getParentRects() const;
 
-    std::string getName() const;
+    std::string getKey() const;
 
     // Equality Operator (for null logic and Testing)
     bool operator==(const Rectangle& r) const;
